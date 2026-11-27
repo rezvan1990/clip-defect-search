@@ -130,7 +130,11 @@ def _expand(states: list[str], templates: list[str], obj: str) -> list[str]:
     return prompts
 
 
-def state_prompts(category: str, variant: str = "ensemble", defect_names: list[str] | None = None) -> tuple[list[str], list[str]]:
+def state_prompts(
+    category: str,
+    variant: str = "ensemble",
+    defect_names: list[str] | None = None,
+) -> tuple[list[str], list[str]]:
     """Return (normal_prompts, anomaly_prompts) for one category.
 
     Variants

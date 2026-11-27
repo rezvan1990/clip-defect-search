@@ -1,0 +1,66 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      QC_DATA_DIR: /var/qc
+      QC_CACHE: /cache/features
+      QC_MODEL: ViT-B-16
+      QC_PRETRAINED: openai
+      QC_DEVICE: cpu
+      HF_HOME: /cache/huggingface
+      # Leave unset until you choose an operating point. The score is not a probability.
+      ALERT_SCORE_THRESHOLD: ${ALERT_SCORE_THRESHOLD:-}
+      DEFECT_WEBHOOK_URL: ${DEFECT_WEBHOOK_URL:-}
+      SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL:-}
+      ALERT_EMAIL_TO: ${ALERT_EMAIL_TO:-}
+      ALERT_EMAIL_FROM: ${ALERT_EMAIL_FROM:-}
+      ALERT_SMTP_HOST: ${ALERT_SMTP_HOST:-}
+      ALERT_SMTP_PORT: ${ALERT_SMTP_PORT:-587}
+      ALERT_SMTP_USER: ${ALERT_SMTP_USER:-}
+      ALERT_SMTP_PASSWORD: ${ALERT_SMTP_PASSWORD:-}
+      ALERT_SMTP_STARTTLS: ${ALERT_SMTP_STARTTLS:-}
+    volumes:
+      - qcdata:/var/qc
+      - modelcache:/cache/huggingface
+      - ./cache:/cache/features:ro
+    command: ["uvicorn", "qcapi.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+  demo:
+    build: .
+    ports:
+      - "7860:7860"
+    environment:
+      QC_MODEL: ViT-B-16
+      QC_PRETRAINED: openai
+      HF_HOME: /cache/huggingface
+      PORT: "7860"
+    volumes:
+      - modelcache:/cache/huggingface
+    command: ["python", "app.py"]
+    depends_on:
+      - api
+
+  dashboard:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      QC_DATA_DIR: /var/qc
+    volumes:
+      - qcdata:/var/qc
+      - ./results:/app/results:ro
+    command:
+      - streamlit
+      - run
+      - dashboard/app.py
+      - --server.address=0.0.0.0
+      - --server.port=8501
+      - --server.headless=true
+    depends_on:
+      - api
+
+volumes:
+  qcdata:
+  modelcache:

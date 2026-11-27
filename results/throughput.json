@@ -1,0 +1,27 @@
+{
+  "measured_on": "2026-11-27",
+  "machine": "4 CPU cores, no GPU",
+  "model": "ViT-B-16",
+  "pretrained": "openai",
+  "device": "cpu",
+  "warmup_excluded": true,
+  "includes": "JPEG decode, CLIP preprocess, image encode, and L2 normalize. Text-prototype construction is reported separately and is not inside the batch timings.",
+  "batch_1": {
+    "n_images": 20,
+    "seconds": 1.7295242649997817,
+    "images_per_second": 11.563873606596971
+  },
+  "batch_16": {
+    "n_images": 48,
+    "seconds": 4.487337728000057,
+    "images_per_second": 10.696765634663501
+  },
+  "online_predict_after_text_prototypes_cached": {
+    "n_images": 10,
+    "seconds": 0.8550295899999583,
+    "images_per_second": 11.69550167263859,
+    "text_prototype_build_seconds_once": 1.004002539999874,
+    "category": "bottle",
+    "note": "Ten bottle test images, one forward each, cosine gap against bottle prototypes built once beforehand."
+  }
+}

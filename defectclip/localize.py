@@ -14,28 +14,20 @@ image encoder applied. Scores are bilinearly upsampled to that 224 crop.
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 import numpy as np
-import torch
+
+if TYPE_CHECKING:
+    import torch
 
 from defectclip.data import MVTEC_CATEGORIES, Record
 from defectclip.encoder import load_aligned_mask, upsample_map
 from defectclip.metrics import safe_auroc
 from defectclip.prompts import defect_phrase, object_phrase, retrieval_prompts
 from defectclip.util import mean_ignore_none
+from defectclip.windows import pool_windows as _pool_windows
 from defectclip.zeroshot import category_prototypes
-
-
-def _pool_windows(tokens_hw: np.ndarray, k: int) -> np.ndarray:
-    if k == 1:
-        return tokens_hw
-    pad = k // 2
-    padded = np.pad(tokens_hw, ((pad, pad), (pad, pad), (0, 0)), mode="edge")
-    height, width, _dim = tokens_hw.shape
-    out = np.empty_like(tokens_hw)
-    for i in range(height):
-        for j in range(width):
-            out[i, j] = padded[i : i + k, j : j + k].mean(axis=(0, 1))
-    return out
 
 
 def similarity_grid(tokens: np.ndarray, prototype: np.ndarray, windows: tuple[int, ...] = (1,)) -> np.ndarray:

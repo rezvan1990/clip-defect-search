@@ -6,8 +6,8 @@ import numpy as np
 from PIL import Image
 
 from defectclip.data import find_mvtec_root, load_mvtec
-from defectclip.localize import _pool_windows
 from defectclip.prompts import defect_phrase, retrieval_prompts, state_prompts
+from defectclip.windows import pool_windows as _pool_windows
 
 
 class PromptTest(unittest.TestCase):

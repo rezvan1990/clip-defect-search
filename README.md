@@ -149,6 +149,62 @@ Four normal photos already beat the text prior. The full normal set is the best 
 
 ![Few-shot adaptation](assets/fewshot_adaptation.png)
 
+## A small QC system
+
+The experiment above is the model. Around it there is an API, an upload demo, a log, alerts, and a dashboard. The diagram is the whole path from a photo to a row in the log.
+
+```mermaid
+flowchart LR
+  photo[Upload or line photo] --> api[FastAPI]
+  api --> clip[Frozen CLIP]
+  api --> db[(SQLite inspections)]
+  api --> alerts[Alert router]
+  alerts --> jsonl[alerts.jsonl]
+  alerts --> hook[Webhook]
+  alerts --> slack[Slack]
+  alerts --> mail[Email]
+  db --> dash[Streamlit dashboard]
+  dash --> calc[Labor-time calculator]
+  space[Gradio upload demo] --> clip
+```
+
+![Services](assets/architecture.png)
+
+`docker compose up --build` starts three processes from one image:
+
+| Service | Port | What it does |
+| --- | --- | --- |
+| api | 8000 | `GET /health`, `POST /predict`, `POST /search` |
+| demo | 7860 | Upload UI (`app.py`). No MVTec files required. |
+| dashboard | 8501 | Reads the API's SQLite log |
+
+The research UI, which ranks the MVTec test split, is still `python app/demo.py` and needs the dataset. `/search` needs the feature cache from `scripts/run_retrieval.py` mounted at `QC_CACHE` (compose mounts `./cache`). `/predict` only needs the CLIP weights.
+
+Alerts are off until you set `ALERT_SCORE_THRESHOLD`. I do not ship a cutoff. The score is a cosine gap, not a probability, and I never fit an operating point on MVTec. When a decision is `defect`, the event is always appended to `var/qc/alerts.jsonl` and the SQLite alert table. If `DEFECT_WEBHOOK_URL`, `SLACK_WEBHOOK_URL`, or the SMTP variables in `.env.example` are set, those channels are tried too. A failed channel is stored on the alert and does not drop the log line. Copy `.env.example` to `.env` for compose.
+
+GitHub Actions (`.github/workflows/ci.yml`) installs `requirements-ci.txt` and runs `ruff` plus `pytest`. That install has no PyTorch and no dataset. The API tests use an in-process fake scorer. The prompt test builds a tiny fake MVTec tree.
+
+### Hugging Face Spaces
+
+`app.py` is the Gradio entrypoint a Space expects. I could not create the Space from here; that needs a Hugging Face account. The steps and the YAML header the Space README wants are in `docs/huggingface-spaces.md`. Locally the same page is `python app.py`.
+
+### Labor time, as a calculator
+
+On 2026-11-27, on this 4-core CPU with no GPU, ViT-B-16 online scoring (JPEG decode, preprocess, encode, cosine gap, text prototypes already built) did **10 bottle images in 0.855 s, which is 11.70 images/second**. A batch of 16 was slower on this machine: 48 images in 4.487 s, 10.70 images/second. Batch size 1 over 20 images was 11.56 images/second. The full record is `results/throughput.json`. Building the bottle text prototypes once took 1.004 s and is not inside those rates.
+
+The dashboard plugs that 11.70 into a form. Everything else is yours to type. The formula, in `defectclip/savings.py`, is:
+
+```
+manual_hours = parts_per_hour * manual_seconds_per_part / 3600
+model_hours  = parts_per_hour / model_images_per_second / 3600
+hour_delta   = manual_hours - model_hours
+labor_delta  = hour_delta * labor_usd_per_hour
+```
+
+`hour_delta` is positive when a person looking at every part would take more time than the encode. It says nothing about misses, false alarms, a reviewer still watching the screen, or rework. It is not a measured saving.
+
+One illustration, with inputs I chose rather than observed: 600 parts per clock hour, 8 seconds of looking per part, 30 USD per labor hour, and the measured 11.6955 images/second. That arithmetic is 1.333 manual labor hours and 0.0143 model-hours per clock hour, so 1.319 hours and 39.57 USD of labor difference per clock hour. Change any input and the number changes. The 39.57 is not something I measured at a plant.
+
 ## How to run
 
 CPU is enough. A GPU will be used if you pass `--device cuda` or leave the default `--device auto`. The first call downloads OpenAI CLIP weights into the Hugging Face cache. They are not committed. Neither is MVTec.
@@ -180,6 +236,19 @@ python app/demo.py
 ```
 
 Retrieval ranks the category you pick. The second tab draws a patch map for one test image and the sentence you type. The zero-shot gap shown there is not a calibrated probability.
+
+The upload demo, the API, and the dashboard:
+
+```bash
+python app.py
+uvicorn qcapi.main:app --host 0.0.0.0 --port 8000
+streamlit run dashboard/app.py
+docker compose up --build
+pytest
+ruff check qcapi qcdemo dashboard app.py defectclip tests
+```
+
+`POST /predict` takes a multipart image, a `category`, and an optional `threshold`. Without a threshold the decision is `unscored` and nothing is alerted. `POST /search` returns 409 until a feature cache exists.
 
 ## Limits
 

@@ -4,6 +4,10 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .gradio/
+.ruff_cache/
+var/
+*.db
+*.jsonl
 
 # datasets and model caches stay out of git
 data/

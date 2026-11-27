@@ -15,7 +15,6 @@ from __future__ import annotations
 import torch
 import torch.nn.functional as F
 
-
 _CHECKED_MODELS: set[int] = set()
 
 
@@ -102,7 +101,13 @@ def _check_matches_encode_image(model, images: torch.Tensor, pooled: torch.Tenso
     _CHECKED_MODELS.add(key)
 
 
-def encode_images(model, preprocess, paths: list[str], device: torch.device, batch_size: int) -> tuple[torch.Tensor, torch.Tensor]:
+def encode_images(
+    model,
+    preprocess,
+    paths: list[str],
+    device: torch.device,
+    batch_size: int,
+) -> tuple[torch.Tensor, torch.Tensor]:
     """Encode a list of image paths.
 
     Returns float32 CPU tensors: image features [N, D] and patch tokens [N, P, D],
@@ -167,7 +172,6 @@ def mask_preprocess(image_preprocess):
 
 def load_aligned_mask(mask_path: str | None, mask_transform, size: int = 224) -> torch.Tensor:
     """Return a float mask in {0, 1} shaped [size, size], aligned with the CLIP crop."""
-    import numpy as np
     from PIL import Image
 
     if mask_path is None:
