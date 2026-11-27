@@ -1,0 +1,517 @@
+{
+  "seed": 0,
+  "model": "ViT-B-16",
+  "pretrained": "openai",
+  "data_root_name": "_mvtec_extract",
+  "mean_auroc": {
+    "zero_shot": 0.8095333713581435,
+    "nn4": 0.8537212180567433,
+    "nn16": 0.8698064030342336,
+    "nn_all": 0.9136841340660786,
+    "zero_shot_heldout": 0.8103855149010063,
+    "probe_gap_nn16": 0.886677407406514,
+    "probe_embedding": 0.8643665340130244
+  },
+  "per_category": {
+    "bottle": {
+      "n_train_normal": 209,
+      "n_test": 83,
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 3,
+      "n_eval": 80,
+      "calibration_anomaly_paths": [
+        "bottle/test/broken_large/010.png",
+        "bottle/test/broken_small/006.png",
+        "bottle/test/contamination/019.png"
+      ],
+      "auroc": {
+        "zero_shot": 0.9214285714285715,
+        "nn4": 0.9888888888888889,
+        "nn16": 0.9888888888888889,
+        "nn_all": 0.9936507936507937,
+        "zero_shot_heldout": 0.9275,
+        "probe_gap_nn16": 0.9833333333333334,
+        "probe_embedding": 0.9166666666666666
+      }
+    },
+    "cable": {
+      "n_train_normal": 224,
+      "n_test": 150,
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 8,
+      "n_eval": 142,
+      "calibration_anomaly_paths": [
+        "cable/test/bent_wire/012.png",
+        "cable/test/cable_swap/010.png",
+        "cable/test/combined/001.png",
+        "cable/test/cut_inner_insulation/007.png",
+        "cable/test/cut_outer_insulation/003.png",
+        "cable/test/missing_cable/005.png",
+        "cable/test/missing_wire/006.png",
+        "cable/test/poke_insulation/008.png"
+      ],
+      "auroc": {
+        "zero_shot": 0.7391304347826086,
+        "nn4": 0.6581709145427286,
+        "nn16": 0.7987256371814093,
+        "nn_all": 0.8480134932533733,
+        "zero_shot_heldout": 0.7454844006568144,
+        "probe_gap_nn16": 0.8261494252873564,
+        "probe_embedding": 0.8567323481116584
+      }
+    },
+    "capsule": {
+      "n_train_normal": 219,
+      "n_test": 132,
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 5,
+      "n_eval": 127,
+      "calibration_anomaly_paths": [
+        "capsule/test/crack/010.png",
+        "capsule/test/faulty_imprint/001.png",
+        "capsule/test/poke/015.png",
+        "capsule/test/scratch/017.png",
+        "capsule/test/squeeze/014.png"
+      ],
+      "auroc": {
+        "zero_shot": 0.7108097327483047,
+        "nn4": 0.8025528520143598,
+        "nn16": 0.8236936577582767,
+        "nn_all": 0.8679696848823294,
+        "zero_shot_heldout": 0.7102842809364549,
+        "probe_gap_nn16": 0.8674749163879599,
+        "probe_embedding": 0.6638795986622074
+      }
+    },
+    "carpet": {
+      "n_train_normal": 280,
+      "n_test": 117,
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 5,
+      "n_eval": 112,
+      "calibration_anomaly_paths": [
+        "carpet/test/color/009.png",
+        "carpet/test/cut/001.png",
+        "carpet/test/hole/007.png",
+        "carpet/test/metal_contamination/000.png",
+        "carpet/test/thread/005.png"
+      ],
+      "auroc": {
+        "zero_shot": 0.978330658105939,
+        "nn4": 0.9743178170144462,
+        "nn16": 0.9634831460674158,
+        "nn_all": 0.9743178170144462,
+        "zero_shot_heldout": 0.9774659863945577,
+        "probe_gap_nn16": 0.9872448979591837,
+        "probe_embedding": 0.9812925170068026
+      }
+    },
+    "grid": {
+      "n_train_normal": 264,
+      "n_test": 78,
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 5,
+      "n_eval": 73,
+      "calibration_anomaly_paths": [
+        "grid/test/bent/004.png",
+        "grid/test/broken/009.png",
+        "grid/test/glue/008.png",
+        "grid/test/metal_contamination/002.png",
+        "grid/test/thread/007.png"
+      ],
+      "auroc": {
+        "zero_shot": 0.9891395154553049,
+        "nn4": 0.7744360902255639,
+        "nn16": 0.858813700918964,
+        "nn_all": 0.9582289055973267,
+        "zero_shot_heldout": 0.9880952380952381,
+        "probe_gap_nn16": 0.9816849816849816,
+        "probe_embedding": 0.902014652014652
+      }
+    },
+    "hazelnut": {
+      "n_train_normal": 391,
+      "n_test": 110,
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 4,
+      "n_eval": 106,
+      "calibration_anomaly_paths": [
+        "hazelnut/test/crack/012.png",
+        "hazelnut/test/cut/015.png",
+        "hazelnut/test/hole/003.png",
+        "hazelnut/test/print/016.png"
+      ],
+      "auroc": {
+        "zero_shot": 0.7389285714285714,
+        "nn4": 0.8832142857142857,
+        "nn16": 0.9007142857142858,
+        "nn_all": 0.8835714285714287,
+        "zero_shot_heldout": 0.7359848484848485,
+        "probe_gap_nn16": 0.9022727272727273,
+        "probe_embedding": 0.906439393939394
+      }
+    },
+    "leather": {
+      "n_train_normal": 245,
+      "n_test": 124,
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 5,
+      "n_eval": 119,
+      "calibration_anomaly_paths": [
+        "leather/test/color/008.png",
+        "leather/test/cut/007.png",
+        "leather/test/fold/004.png",
+        "leather/test/glue/009.png",
+        "leather/test/poke/010.png"
+      ],
+      "auroc": {
+        "zero_shot": 0.9894701086956521,
+        "nn4": 0.9945652173913043,
+        "nn16": 0.9945652173913043,
+        "nn_all": 0.9976222826086957,
+        "zero_shot_heldout": 0.9888649425287357,
+        "probe_gap_nn16": 0.9996408045977011,
+        "probe_embedding": 0.9971264367816092
+      }
+    },
+    "metal_nut": {
+      "n_train_normal": 220,
+      "n_test": 115,
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 4,
+      "n_eval": 111,
+      "calibration_anomaly_paths": [
+        "metal_nut/test/bent/014.png",
+        "metal_nut/test/color/007.png",
+        "metal_nut/test/flip/009.png",
+        "metal_nut/test/scratch/019.png"
+      ],
+      "auroc": {
+        "zero_shot": 0.9379276637341154,
+        "nn4": 0.8611925708699902,
+        "nn16": 0.8426197458455523,
+        "nn_all": 0.8826979472140764,
+        "zero_shot_heldout": 0.9438202247191011,
+        "probe_gap_nn16": 0.9637385086823289,
+        "probe_embedding": 0.7783452502553626
+      }
+    },
+    "pill": {
+      "n_train_normal": 267,
+      "n_test": 167,
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 7,
+      "n_eval": 160,
+      "calibration_anomaly_paths": [
+        "pill/test/color/007.png",
+        "pill/test/combined/002.png",
+        "pill/test/contamination/012.png",
+        "pill/test/crack/019.png",
+        "pill/test/faulty_imprint/011.png",
+        "pill/test/pill_type/007.png",
+        "pill/test/scratch/021.png"
+      ],
+      "auroc": {
+        "zero_shot": 0.6352973267866884,
+        "nn4": 0.779050736497545,
+        "nn16": 0.7697763229678124,
+        "nn_all": 0.8494271685761047,
+        "zero_shot_heldout": 0.6412169919632605,
+        "probe_gap_nn16": 0.7809988518943742,
+        "probe_embedding": 0.8010907003444316
+      }
+    },
+    "screw": {
+      "n_train_normal": 320,
+      "n_test": 160,
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 5,
+      "n_eval": 155,
+      "calibration_anomaly_paths": [
+        "screw/test/manipulated_front/013.png",
+        "screw/test/scratch_head/001.png",
+        "screw/test/scratch_neck/013.png",
+        "screw/test/thread_side/015.png",
+        "screw/test/thread_top/020.png"
+      ],
+      "auroc": {
+        "zero_shot": 0.5935642549702808,
+        "nn4": 0.5747079319532691,
+        "nn16": 0.4964131994261119,
+        "nn_all": 0.7538430006148801,
+        "zero_shot_heldout": 0.5932819854514334,
+        "probe_gap_nn16": 0.5282413350449294,
+        "probe_embedding": 0.6255883611467694
+      }
+    },
+    "tile": {
+      "n_train_normal": 230,
+      "n_test": 117,
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 5,
+      "n_eval": 112,
+      "calibration_anomaly_paths": [
+        "tile/test/crack/006.png",
+        "tile/test/glue_strip/003.png",
+        "tile/test/gray_stroke/001.png",
+        "tile/test/oil/014.png",
+        "tile/test/rough/003.png"
+      ],
+      "auroc": {
+        "zero_shot": 0.9613997113997115,
+        "nn4": 0.9913419913419913,
+        "nn16": 0.996031746031746,
+        "nn_all": 0.9953102453102454,
+        "zero_shot_heldout": 0.9601074031453778,
+        "probe_gap_nn16": 0.9919447640966628,
+        "probe_embedding": 0.9984656693517453
+      }
+    },
+    "toothbrush": {
+      "n_train_normal": 60,
+      "n_test": 42,
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 1,
+      "n_eval": 41,
+      "calibration_anomaly_paths": [
+        "toothbrush/test/defective/025.png"
+      ],
+      "auroc": {
+        "zero_shot": 0.4638888888888889,
+        "nn4": 0.8555555555555556,
+        "nn16": 0.9555555555555555,
+        "nn_all": 0.975,
+        "zero_shot_heldout": 0.4798850574712644,
+        "probe_gap_nn16": 0.8448275862068966,
+        "probe_embedding": 0.7787356321839081
+      }
+    },
+    "transistor": {
+      "n_train_normal": 213,
+      "n_test": 100,
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 4,
+      "n_eval": 96,
+      "calibration_anomaly_paths": [
+        "transistor/test/bent_lead/004.png",
+        "transistor/test/cut_lead/001.png",
+        "transistor/test/damaged_case/004.png",
+        "transistor/test/misplaced/005.png"
+      ],
+      "auroc": {
+        "zero_shot": 0.7266666666666666,
+        "nn4": 0.7945833333333333,
+        "nn16": 0.7675000000000001,
+        "nn_all": 0.8275,
+        "zero_shot_heldout": 0.7092592592592591,
+        "probe_gap_nn16": 0.7777777777777778,
+        "probe_embedding": 0.8319444444444444
+      }
+    },
+    "wood": {
+      "n_train_normal": 247,
+      "n_test": 79,
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 5,
+      "n_eval": 74,
+      "calibration_anomaly_paths": [
+        "wood/test/color/006.png",
+        "wood/test/combined/008.png",
+        "wood/test/hole/003.png",
+        "wood/test/liquid/007.png",
+        "wood/test/scratch/016.png"
+      ],
+      "auroc": {
+        "zero_shot": 0.9657894736842105,
+        "nn4": 0.9956140350877192,
+        "nn16": 0.9982456140350878,
+        "nn_all": 1.0,
+        "zero_shot_heldout": 0.9626794258373206,
+        "probe_gap_nn16": 0.985645933014354,
+        "probe_embedding": 1.0
+      }
+    },
+    "zipper": {
+      "n_train_normal": 240,
+      "n_test": 151,
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 7,
+      "n_eval": 144,
+      "calibration_anomaly_paths": [
+        "zipper/test/broken_teeth/013.png",
+        "zipper/test/combined/001.png",
+        "zipper/test/fabric_border/003.png",
+        "zipper/test/fabric_interior/001.png",
+        "zipper/test/rough/011.png",
+        "zipper/test/split_teeth/000.png",
+        "zipper/test/squeezed_teeth/002.png"
+      ],
+      "auroc": {
+        "zero_shot": 0.7912289915966386,
+        "nn4": 0.8776260504201681,
+        "nn16": 0.8920693277310925,
+        "nn_all": 0.898109243697479,
+        "zero_shot_heldout": 0.7918526785714285,
+        "probe_gap_nn16": 0.8791852678571429,
+        "probe_embedding": 0.9271763392857143
+      }
+    }
+  },
+  "protocol_counts": [
+    {
+      "category": "bottle",
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 3,
+      "n_eval": 80
+    },
+    {
+      "category": "cable",
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 8,
+      "n_eval": 142
+    },
+    {
+      "category": "capsule",
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 5,
+      "n_eval": 127
+    },
+    {
+      "category": "carpet",
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 5,
+      "n_eval": 112
+    },
+    {
+      "category": "grid",
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 5,
+      "n_eval": 73
+    },
+    {
+      "category": "hazelnut",
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 4,
+      "n_eval": 106
+    },
+    {
+      "category": "leather",
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 5,
+      "n_eval": 119
+    },
+    {
+      "category": "metal_nut",
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 4,
+      "n_eval": 111
+    },
+    {
+      "category": "pill",
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 7,
+      "n_eval": 160
+    },
+    {
+      "category": "screw",
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 5,
+      "n_eval": 155
+    },
+    {
+      "category": "tile",
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 5,
+      "n_eval": 112
+    },
+    {
+      "category": "toothbrush",
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 1,
+      "n_eval": 41
+    },
+    {
+      "category": "transistor",
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 4,
+      "n_eval": 96
+    },
+    {
+      "category": "wood",
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 5,
+      "n_eval": 74
+    },
+    {
+      "category": "zipper",
+      "k4": 4,
+      "k16": 16,
+      "n_calibration_normals": 8,
+      "n_calibration_anomalies": 7,
+      "n_eval": 144
+    }
+  ],
+  "notes": {
+    "nn": "1 - max cosine to k normal training images. No anomaly labels. Full test set.",
+    "probes": "Logistic regression fit on 8 normal training images plus one test anomaly per defect type. Scored on the remaining test images. probe_gap_nn16 uses two features (zero-shot gap, NN-16 distance), C=1. probe_embedding uses the CLIP vector, C=0.01.",
+    "zero_shot_heldout": "Same text score as zero_shot, restricted to the probe's eval images."
+  }
+}

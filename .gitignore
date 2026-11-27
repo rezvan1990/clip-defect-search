@@ -1,0 +1,21 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.gradio/
+
+# datasets and model caches stay out of git
+data/
+cache/
+weights/
+*.tar
+*.tar.xz
+*.tar.gz
+*.pth
+*.pt
+*.bin
+*.safetensors
+
+.DS_Store
+.ipynb_checkpoints/

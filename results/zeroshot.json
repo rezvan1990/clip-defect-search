@@ -1,0 +1,130 @@
+{
+  "seed": 0,
+  "model": "ViT-B-16",
+  "pretrained": "openai",
+  "variant": "ensemble",
+  "mean_auroc": 0.8095333713581435,
+  "per_category": {
+    "bottle": {
+      "auroc": 0.9214285714285715,
+      "n": 83,
+      "n_normal": 20,
+      "n_anomaly": 63,
+      "n_normal_prompts": 36,
+      "n_anomaly_prompts": 36
+    },
+    "cable": {
+      "auroc": 0.7391304347826086,
+      "n": 150,
+      "n_normal": 58,
+      "n_anomaly": 92,
+      "n_normal_prompts": 36,
+      "n_anomaly_prompts": 36
+    },
+    "capsule": {
+      "auroc": 0.7108097327483047,
+      "n": 132,
+      "n_normal": 23,
+      "n_anomaly": 109,
+      "n_normal_prompts": 36,
+      "n_anomaly_prompts": 36
+    },
+    "carpet": {
+      "auroc": 0.978330658105939,
+      "n": 117,
+      "n_normal": 28,
+      "n_anomaly": 89,
+      "n_normal_prompts": 36,
+      "n_anomaly_prompts": 36
+    },
+    "grid": {
+      "auroc": 0.9891395154553049,
+      "n": 78,
+      "n_normal": 21,
+      "n_anomaly": 57,
+      "n_normal_prompts": 36,
+      "n_anomaly_prompts": 36
+    },
+    "hazelnut": {
+      "auroc": 0.7389285714285714,
+      "n": 110,
+      "n_normal": 40,
+      "n_anomaly": 70,
+      "n_normal_prompts": 36,
+      "n_anomaly_prompts": 36
+    },
+    "leather": {
+      "auroc": 0.9894701086956521,
+      "n": 124,
+      "n_normal": 32,
+      "n_anomaly": 92,
+      "n_normal_prompts": 36,
+      "n_anomaly_prompts": 36
+    },
+    "metal_nut": {
+      "auroc": 0.9379276637341154,
+      "n": 115,
+      "n_normal": 22,
+      "n_anomaly": 93,
+      "n_normal_prompts": 36,
+      "n_anomaly_prompts": 36
+    },
+    "pill": {
+      "auroc": 0.6352973267866884,
+      "n": 167,
+      "n_normal": 26,
+      "n_anomaly": 141,
+      "n_normal_prompts": 36,
+      "n_anomaly_prompts": 36
+    },
+    "screw": {
+      "auroc": 0.5935642549702808,
+      "n": 160,
+      "n_normal": 41,
+      "n_anomaly": 119,
+      "n_normal_prompts": 36,
+      "n_anomaly_prompts": 36
+    },
+    "tile": {
+      "auroc": 0.9613997113997115,
+      "n": 117,
+      "n_normal": 33,
+      "n_anomaly": 84,
+      "n_normal_prompts": 36,
+      "n_anomaly_prompts": 36
+    },
+    "toothbrush": {
+      "auroc": 0.4638888888888889,
+      "n": 42,
+      "n_normal": 12,
+      "n_anomaly": 30,
+      "n_normal_prompts": 36,
+      "n_anomaly_prompts": 36
+    },
+    "transistor": {
+      "auroc": 0.7266666666666666,
+      "n": 100,
+      "n_normal": 60,
+      "n_anomaly": 40,
+      "n_normal_prompts": 36,
+      "n_anomaly_prompts": 36
+    },
+    "wood": {
+      "auroc": 0.9657894736842105,
+      "n": 79,
+      "n_normal": 19,
+      "n_anomaly": 60,
+      "n_normal_prompts": 36,
+      "n_anomaly_prompts": 36
+    },
+    "zipper": {
+      "auroc": 0.7912289915966386,
+      "n": 151,
+      "n_normal": 32,
+      "n_anomaly": 119,
+      "n_normal_prompts": 36,
+      "n_anomaly_prompts": 36
+    }
+  },
+  "definition": "Image AUROC of the cosine gap between the anomaly prompt prototype and the normal prompt prototype."
+}
